@@ -1,10 +1,7 @@
 import React from "react";
 
-// Header Component with Login Link
 const Header = () => {
   const handleLogin = () => {
-    // Redirect to login page or open login modal
-    // For example: window.location.href = '/login';
     alert("Redirecting to login...");
   };
 
@@ -28,6 +25,8 @@ const styles = {
     color: "white",
     padding: "20px",
     display: "flex",
+    "align-items": "center",
+    "justify-content": "space-between",
   },
   title: {
     margin: 0,
@@ -39,9 +38,6 @@ const styles = {
     fontWeight: "300",
   },
   loginButton: {
-    position: "absolute",
-    right: "20px",
-    top: "20px",
     backgroundColor: "#FFF",
     color: "#4CAF50",
     border: "none",
