@@ -1,7 +1,7 @@
+import React from "react";
+
 function App() {
-  return (
-    <div>This is the container entry!!!!</div>
-  )
+  return <div>This is the container entry!!!!</div>;
 }
 
-export default App
+export default App;
