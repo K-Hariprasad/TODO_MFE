@@ -1,8 +1,9 @@
 import React from "react";
-import Todo from "./pages/Todo";
+import { RouterProvider } from "react-router-dom";
+import router from "./Router";
 
 function App() {
-  return <Todo />;
+  return <RouterProvider router={router} />;
 }
 
 export default App;

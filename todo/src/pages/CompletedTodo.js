@@ -1,41 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 
-const Todo = () => {
+function CompletedTodo() {
   const [tasks, setTasks] = useState([]);
   const [task, setTask] = useState("");
 
   // Load tasks from localStorage on initial render
   useEffect(() => {
     const savedTasks = JSON.parse(localStorage.getItem("tasks"));
-    if (savedTasks) setTasks(savedTasks);
+    const completedTasks = savedTasks.filter(i=>i.completed)
+    if (completedTasks) setTasks(completedTasks);
   }, []);
-
-  // Save tasks to localStorage whenever tasks array changes
-  useEffect(() => {
-    localStorage.setItem("tasks", JSON.stringify(tasks));
-  }, [tasks]);
-
-  const addTask = () => {
-    if (task.trim()) {
-      setTasks([
-        ...tasks,
-        {
-          text: task,
-          completed: false,
-          createdAt: new Date().toISOString().split("T")[0],
-        },
-      ]);
-      setTask("");
-    }
-  };
-
-  const toggleComplete = (index) => {
-    const updatedTasks = tasks.map((t, i) =>
-      i === index ? { ...t, completed: !t.completed } : t
-    );
-    setTasks(updatedTasks);
-  };
 
   const deleteTask = (index) => {
     setTasks(tasks.filter((_, i) => i !== index));
@@ -43,30 +17,14 @@ const Todo = () => {
 
   return (
     <div style={styles.container}>
-      <Link to={'products'}>See products list</Link>
-      <h1>Todo App</h1>
-      <div style={styles.inputContainer}>
-        <input
-          type="text"
-          value={task}
-          onChange={(e) => setTask(e.target.value)}
-          placeholder="Enter a new task"
-          style={styles.input}
-        />
-        <button onClick={addTask} style={styles.button}>
-          Add Task
-        </button>
-      </div>
-      <Link to={`completed-todo`}>
-        <button style={styles.completedTaskLink}>See your completed tasks</button>
-      </Link>
+
+      {" "}
       <ul style={styles.list}>
         {tasks.map((t, index) => (
           <li
             key={index}
             style={{
               ...styles.listItem,
-              textDecoration: t.completed ? "line-through" : "none",
             }}
           >
             <span
@@ -92,7 +50,9 @@ const Todo = () => {
       </ul>
     </div>
   );
-};
+}
+
+export default CompletedTodo;
 
 // Inline styles for simplicity
 const styles = {
@@ -102,18 +62,6 @@ const styles = {
     padding: "20px",
     textAlign: "center",
     fontFamily: "Arial, sans-serif",
-  },
-  inputContainer: {
-    display: "flex",
-    justifyContent: "space-between",
-    marginBottom: "20px",
-    marginTop: "20px",
-  },
-  input: {
-    flex: "1",
-    padding: "10px",
-    marginRight: "10px",
-    fontSize: "16px",
   },
   button: {
     padding: "10px 20px",
@@ -139,15 +87,4 @@ const styles = {
     padding: "5px 10px",
     cursor: "pointer",
   },
-  completedTaskLink: {
-    background: "green",
-    color: "white",
-    border: "none",
-    padding: "5px 10px",
-    cursor: "pointer",
-    marginLeft: '170px',
-    marginBottom: '15px'
-  }
 };
-
-export default Todo;
