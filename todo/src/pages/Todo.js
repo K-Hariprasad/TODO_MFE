@@ -72,7 +72,8 @@ const styles = {
   inputContainer: {
     display: 'flex',
     justifyContent: 'space-between',
-    marginBottom: '20px'
+    marginBottom: '20px',
+    marginTop: '20px'
   },
   input: {
     flex: '1',
